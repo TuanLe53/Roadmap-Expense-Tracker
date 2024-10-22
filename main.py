@@ -2,7 +2,7 @@ import typer
 import csv
 from rich import print
 
-from expense import add_expense, get_total_expense
+from expense import add_expense, get_total_expense, delete_expense_record
 from utils import show_table
 
 app = typer.Typer()
@@ -28,6 +28,14 @@ def add(description: str = "", amount: int = 0):
         raise ValueError("[bold red]Error:[/bold red] Please provide a description and amount.")
     
     add_expense(description, amount)
+    
+@app.command()
+def delete(id: str = ""):
+    if not id:
+        raise ValueError("[bold red]Error:[/bold red] Please provide an expense record's id.")
+    
+    delete_expense_record(id)
+    print("Done")
     
 if __name__ == "__main__":
     app() 
