@@ -1,11 +1,13 @@
+import uuid
 from csv import writer, reader
 from datetime import datetime
 
 def add_expense(description: str, amount: int) -> None:
+    id = uuid.uuid4()
     current_date = datetime.today().strftime("%Y-%m-%d")
     with open("tracker.csv", "a") as f:
         writer_obj = writer(f, lineterminator="\n")
-        writer_obj.writerow([description, amount, current_date])
+        writer_obj.writerow([id, description, amount, current_date])
         
         f.close()
         
