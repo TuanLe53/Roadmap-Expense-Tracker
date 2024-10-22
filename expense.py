@@ -20,6 +20,6 @@ def get_total_expense() -> int:
         
         total = 0
         for row in csv_reader:
-            total += int(row[1])
+            total += int(row[2])
             
         return total
