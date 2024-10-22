@@ -1,9 +1,11 @@
 from csv import writer, reader
+from datetime import datetime
 
 def add_expense(description: str, amount: int) -> None:
+    current_date = datetime.today().strftime("%Y-%m-%d")
     with open("tracker.csv", "a") as f:
         writer_obj = writer(f, lineterminator="\n")
-        writer_obj.writerow([description, amount])
+        writer_obj.writerow([description, amount, current_date])
         
         f.close()
         
