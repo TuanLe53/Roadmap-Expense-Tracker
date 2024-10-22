@@ -23,3 +23,19 @@ def get_total_expense() -> int:
             total += int(row[2])
             
         return total
+    
+def delete_expense_record(id: str) -> None:
+    with open("tracker.csv", "r") as f:
+        csv_reader = reader(f)
+        
+        #Skip header
+        next(csv_reader, None)
+        
+        new_records = [record for record in csv_reader if record[0] != id]
+    
+    with open("tracker.csv", "w") as f:
+        writer_obj = writer(f, lineterminator="\n")
+        writer_obj.writerow(["id", "description", "price", "date"])
+        
+        for record in new_records:
+            writer_obj.writerow(record)
