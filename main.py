@@ -1,7 +1,8 @@
 import typer
 import csv
+from rich import print
 
-from expense import add_expense
+from expense import add_expense, get_total_expense
 from utils import show_table
 
 app = typer.Typer()
@@ -15,6 +16,11 @@ def list():
         next(csv_reader, None)
         
         show_table(csv_reader)
+        
+@app.command()
+def summary():
+    total = get_total_expense()
+    print(f"Total expenses: ${total}")
 
 @app.command()
 def add(description: str = "", amount: int = 0):
