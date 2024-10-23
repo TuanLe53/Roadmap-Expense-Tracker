@@ -11,6 +11,17 @@ def add_expense(description: str, amount: int) -> None:
         
         f.close()
         
+def get_expense_of_month(month: int):
+    with open("tracker.csv", "r") as f:
+        csv_reader = reader(f)
+
+        #Skip header
+        next(csv_reader, None)
+        
+        results = [expense for expense in csv_reader if datetime.strptime(expense[3], "%Y-%m-%d").month == month ]
+
+    return results
+
 def get_total_expense() -> int:
     with open("tracker.csv", "r") as f:
         csv_reader = reader(f)
