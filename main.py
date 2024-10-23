@@ -8,7 +8,12 @@ from utils import show_table
 app = typer.Typer()
 
 @app.command()
-def list():
+def list(month: int = 0):
+    if 0 <= month <= 12:
+        pass
+    else:
+        raise ValueError("[bold red]Error:[/bold red] Invalid input! The program only accepts month values from 1 to 12, or you can leave it blank to get a report for all 12 months.")
+    
     with open("tracker.csv", "r") as f:
         csv_reader = csv.reader(f)
 
