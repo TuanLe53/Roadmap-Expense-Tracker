@@ -2,25 +2,28 @@ import typer
 import csv
 from rich import print
 
-from expense import add_expense, get_total_expense, delete_expense_record
+from expense import add_expense, get_total_expense, delete_expense_record, get_expense_of_month
 from utils import show_table
 
 app = typer.Typer()
 
 @app.command()
 def list(month: int = 0):
-    if 0 <= month <= 12:
-        pass
+    if 1 <= month <= 12:
+        data = get_expense_of_month(month)
+        show_table(data)
+        return
+    elif month == 0:        
+        with open("tracker.csv", "r") as f:
+            csv_reader = csv.reader(f)
+
+            #Skip header
+            next(csv_reader, None)
+            
+            show_table(csv_reader)
     else:
         raise ValueError("[bold red]Error:[/bold red] Invalid input! The program only accepts month values from 1 to 12, or you can leave it blank to get a report for all 12 months.")
     
-    with open("tracker.csv", "r") as f:
-        csv_reader = csv.reader(f)
-
-        #Skip header
-        next(csv_reader, None)
-        
-        show_table(csv_reader)
         
 @app.command()
 def summary():
