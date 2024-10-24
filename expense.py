@@ -22,18 +22,12 @@ def get_expense_of_month(month: int):
 
     return results
 
-def get_total_expense() -> int:
-    with open("tracker.csv", "r") as f:
-        csv_reader = reader(f)
-        
-        #Skip header
-        next(csv_reader, None)
-        
-        total = 0
-        for row in csv_reader:
-            total += int(row[2])
-            
-        return total
+def get_total_expense(expenses) -> int:
+    total = 0
+    for row in expenses:
+        total += int(row[2])
+    
+    return total
     
 def delete_expense_record(id: str) -> None:
     with open("tracker.csv", "r") as f:
