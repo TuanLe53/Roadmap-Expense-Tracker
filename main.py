@@ -47,6 +47,7 @@ def add(description: str = "", amount: int = 0):
         raise ValueError("[bold red]Error:[/bold red] Please provide a description and amount.")
     
     add_expense(description, amount)
+    print(f"[bold green]Success:[/bold green] Added expense '{description}' with amount {amount:,}.")
     
 @app.command()
 def delete(id: str = ""):
