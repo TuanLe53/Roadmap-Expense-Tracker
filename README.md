@@ -19,3 +19,9 @@ python .\main.py list --month 11 #List expenses of specific month
 python .\main.py add --description "Milk" --amount 10
 ```
 
+
+- `summary`: Get a summary of all expenses
+```sh
+python .\main.py summary #Get a summary of all expenses
+python .\main.py summary --month 11 #Get a summary of all expenses for a specific month
+```
