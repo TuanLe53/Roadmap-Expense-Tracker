@@ -25,3 +25,9 @@ python .\main.py add --description "Milk" --amount 10
 python .\main.py summary #Get a summary of all expenses
 python .\main.py summary --month 11 #Get a summary of all expenses for a specific month
 ```
+
+
+- `delete`:  Delete an expense by id
+```sh
+python .\main.py delete --id "expense_id"
+```
