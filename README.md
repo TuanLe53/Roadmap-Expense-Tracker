@@ -14,10 +14,11 @@
 
    # On macOS and Linux:
    source env/bin/activate
+   ```
 3. Install Dependencies
    ```sh
    pip install -r requirements.txt
-
+   ```
 
 ## Usage
 - Show help
