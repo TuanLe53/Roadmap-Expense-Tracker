@@ -2,7 +2,7 @@ import typer
 import csv
 from rich import print
 
-from expense import add_expense, get_total_expense, delete_expense_record, get_expense_of_month
+from expense import add_expense, get_total_expense, delete_expense_record, get_expense_of_month, get_expense, update_expense_record
 from utils import show_table
 
 app = typer.Typer()
@@ -12,7 +12,6 @@ def list(month: int = 0):
     if 1 <= month <= 12:
         data = get_expense_of_month(month)
         show_table(data)
-        return
     elif month == 0:        
         with open("tracker.csv", "r") as f:
             csv_reader = csv.reader(f)
@@ -48,6 +47,26 @@ def add(description: str = "", amount: int = 0):
     
     add_expense(description, amount)
     print(f"[bold green]Success:[/bold green] Added expense '{description}' with amount {amount:,}.")
+    
+@app.command()
+def update(id: str= "", description: str = None, amount: int = None):
+    if not id:
+        print("[bold red]Error:[/bold red] ID is required.")
+        return
+    
+    expense = get_expense(id)
+    if not expense:
+        print("[bold red]Error:[/bold red] Not found")
+        return
+    
+    if not description and amount is None:
+        raise ValueError("[bold red]Error:[/bold red] Please provide a description and amount.")
+
+    if description:
+        expense[1] = description
+    if amount is not None and amount > 0:
+        expense[2] = amount
+    update_expense_record(id, expense)
     
 @app.command()
 def delete(id: str = ""):
