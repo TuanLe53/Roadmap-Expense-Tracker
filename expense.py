@@ -29,6 +29,17 @@ def get_total_expense(expenses) -> int:
     
     return total
     
+def get_expense(id: str):
+    with open("tracker.csv", "r") as f:
+        csv_reader = reader(f)
+        #Skip header
+        next(csv_reader, None)
+        
+        for row in csv_reader:
+            if row[0] == id:
+                return row
+        return None
+    
 def delete_expense_record(id: str) -> None:
     with open("tracker.csv", "r") as f:
         csv_reader = reader(f)
