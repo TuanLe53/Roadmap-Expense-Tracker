@@ -40,6 +40,25 @@ def get_expense(id: str):
                 return row
         return None
     
+def update_expense_record(id: str, updated_expense: list[str]):
+    with open("tracker.csv", "r") as f:
+        csv_reader = reader(f)
+        #Skip header
+        next(csv_reader, None)
+        
+        new_records = []
+        for row in csv_reader:
+            if row[0] == id:
+                row = updated_expense
+            new_records.append(row)
+    
+    with open("tracker.csv", "w") as f:
+        writer_obj = writer(f, lineterminator="\n")
+        writer_obj.writerow(["id", "description", "price", "date"])
+        
+        for record in new_records:
+            writer_obj.writerow(record)
+    
 def delete_expense_record(id: str) -> None:
     with open("tracker.csv", "r") as f:
         csv_reader = reader(f)
