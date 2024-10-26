@@ -50,3 +50,10 @@ python .\main.py summary --month 11 #Get a summary of all expenses for a specifi
 ```sh
 python .\main.py delete --id "expense_id"
 ```
+
+- `update`: Update an expense by id
+```sh
+python .\main.py update --id "expense_id" --description "New description" --amount 30
+python .\main.py update --id "expense_id" --description "New description" #Update only description
+python .\main.py update --id "expense_id" --amount 30 #Update only amount
+```
