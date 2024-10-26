@@ -2,6 +2,8 @@ import uuid
 from csv import writer, reader
 from datetime import datetime
 
+from utils import write_csv_file
+
 def add_expense(description: str, amount: int) -> None:
     id = uuid.uuid4()
     current_date = datetime.today().strftime("%Y-%m-%d")
@@ -52,12 +54,10 @@ def update_expense_record(id: str, updated_expense: list[str]):
                 row = updated_expense
             new_records.append(row)
     
-    with open("tracker.csv", "w") as f:
-        writer_obj = writer(f, lineterminator="\n")
-        writer_obj.writerow(["id", "description", "price", "date"])
-        
-        for record in new_records:
-            writer_obj.writerow(record)
+    write_csv_file("tracker.csv",
+                   ["id", "description", "price", "date"],
+                   new_records
+                   )
     
 def delete_expense_record(id: str) -> None:
     with open("tracker.csv", "r") as f:
@@ -68,9 +68,7 @@ def delete_expense_record(id: str) -> None:
         
         new_records = [record for record in csv_reader if record[0] != id]
     
-    with open("tracker.csv", "w") as f:
-        writer_obj = writer(f, lineterminator="\n")
-        writer_obj.writerow(["id", "description", "price", "date"])
-        
-        for record in new_records:
-            writer_obj.writerow(record)
+    write_csv_file("tracker.csv",
+                   ["id", "description", "price", "date"],
+                   new_records
+                   )
