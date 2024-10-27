@@ -72,6 +72,10 @@ def update(id: str= "", description: str = None, amount: int = None):
 def delete(id: str = ""):
     if not id:
         raise ValueError("[bold red]Error:[/bold red] Please provide an expense record's id.")
+    expense = get_expense(id)
+    if not expense:
+        print("[bold red]Error:[/bold red] Not found")
+        return
     
     delete_expense_record(id)
     print("Done")
