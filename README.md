@@ -1,5 +1,10 @@
 # Roadmap-Expense-Tracker
 
+## Description
+The Expense Tracker CLI is a command-line tool  designed to help users track and manage their personal finances directly from the terminal. This CLI enables users to add, view, update, and delete expenses with ease.
+
+It is inspired by the [Expense Tracker](https://roadmap.sh/projects/expense-tracker) project from [roadmap.sh](https://roadmap.sh/).
+
 ## Installation
 1. **Clone the Repository**:
    ``` python
